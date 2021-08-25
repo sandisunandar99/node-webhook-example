@@ -14,7 +14,7 @@ const webhooks = new WebHooks({
 })
 
 /**
- * agar bisa di baca webhook method yang di gunakan harus post
+ * method can read on webhooks using POST
  */
 
 webhooks.add('shortname1', 'http://127.0.0.1:3034/post').then(function(){
