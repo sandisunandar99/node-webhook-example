@@ -21,22 +21,39 @@ const webhooks = new WebHooks({
  * method can read on webhooks using POST
  */
 
-// url silacak / kemennkes
-webhooks.add('client', 'http://127.0.0.1:3034/post').then(function(){
+// define URL client1 for webhook
+webhooks.add('client1', 'http://127.0.0.1:3034/post/1').then(function(){
     // done
 }).catch(function(err){
     console.log(err)
 })
 
+// defining URL client2 for webhook
+webhooks.add('client2', 'http://127.0.0.1:3034/post/2').then(function(){
+
+}).catch(function(err){
+    console.log(err)
+})
 
 /**
- * simulation triger data for send to client 
+ * strategy 1 :  post data without key and header data  
 */
-app.post('/post', (req, res) => {
+app.post('/post/1', (req, res) => {
     const sendBody = req.body   
 
-    webhooks.trigger('client', sendBody, {Authorization: 'aklsdalsdbaljhkasbdajklhskghj'})
-    res.send('post data webhook')
+    webhooks.trigger('client1', sendBody)
+    res.send('post data webhook 1')
+})
+
+
+/**
+ * strategy 2 :  post data with key and header data
+*/
+app.post('/post/2', (req, res) => {
+    const sendBody = req.body
+
+    webhooks.trigger('client2', sendBody)
+    res.send('post data webhook 2')
 })
 
 
@@ -54,28 +71,25 @@ app.post('/saved', (req, res) => {
 */
 const emitter =  webhooks.getEmitter()
 emitter.on('*.success', function (shortname, statusCode, body) {
-    console.log('Success on trigger webHook ' + shortname + ' with status code ', statusCode, ' and body ', body)
+    console.log('Success on trigger webhooks ' + shortname + ' with status code ', statusCode, ' and body ', body)
 })
  
 emitter.on('*.failure', function (shortname, statusCode, body) {
-    console.error('Error on trigger webHook ' + shortname + ' with status code ', statusCode, ' and body ', body)
+    console.error('Error on trigger webhooks ' + shortname + ' with status code ', statusCode, ' and body ', body)
 })
 
 
-
-app.use(Express.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-
-app.get('/get', (req, res) => {
-    res.send('Hello World')
+app.get('/', (req, res) => {
+    res.send('App Webhooks servers')
 })
-
 
 
 app.use((req, res, next) => {
     res.status(404).send('404 Not Found')
 })
+
+
+
 
 const port = 3033
 app.listen(port, console.log(`server running on port ${port}`))

@@ -9,14 +9,27 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 /**
- * endpoint for get data webhook from server
+ * endpoint for get data webhook from server strategy 1
 */
-app.post('/post', (req, res) => {
-    console.log(req.headers);
+app.post('/post/1', (req, res) => {
     console.log(req.body);
     
     //send response status for webhook API call 
-    res.send('Success saved name : khi hadi')
+    res.send({message: "success", data : req.body})
+})
+
+/**
+ * endpoint for get data webhook from server strategy 2
+*/
+app.post('/post/2', (req, res) => {
+    console.log(req.body);
+    console.log(req.headers);
+    //send response status for webhook API call 
+    res.send({message: "success", data : req.body})
+})
+
+app.get('/', (req, res) => {
+    res.send('App Client test Webhooks')
 })
 
 app.use((req, res, next) => {
