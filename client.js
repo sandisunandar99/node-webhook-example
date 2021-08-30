@@ -8,14 +8,15 @@ app.use(Express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-app.get('/get', (req, res) => {
-    console.log('getttttttt');
-    res.send('Hello GET')
-})
-
+/**
+ * endpoint for get data webhook from server
+*/
 app.post('/post', (req, res) => {
-    console.log("posttttttttttt");
-    res.send('Hello POST')
+    console.log(req.headers);
+    console.log(req.body);
+    
+    //send response status for webhook API call 
+    res.send('Success saved name : khi hadi')
 })
 
 app.use((req, res, next) => {
