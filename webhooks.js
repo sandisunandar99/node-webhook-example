@@ -22,16 +22,11 @@ const webhooks = new WebHooks({
  */
 
 // define URL client1 for webhook
-webhooks.add('client1', 'https://sandi.requestcatcher.com/webhook').then(function(){
+webhooks.add('client1', 'http://127.0.0.1:3034/post/1').then(function(){
     // done
 }).catch(function(err){
     console.log(err)
 })
-// webhooks.add('client1', 'http://127.0.0.1:3034/post/1').then(function(){
-//     // done
-// }).catch(function(err){
-//     console.log(err)
-// })
 
 
 // defining URL client2 for webhook
