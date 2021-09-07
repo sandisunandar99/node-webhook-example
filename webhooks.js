@@ -30,7 +30,7 @@ webhooks.add('client1', 'http://127.0.0.1:3034/post/1').then(function(){
 
 
 // defining URL client2 for webhook
-webhooks.add('client2', 'http://127.0.0.1:3034/post/2').then(function(){
+webhooks.add('client2', 'http://127.0.0.1:3034/post/2?key=123456').then(function(){
 
 }).catch(function(err){
     console.log(err)
