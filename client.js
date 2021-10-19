@@ -22,15 +22,18 @@ app.post('/post/1', (req, res) => {
  * endpoint for get data webhook from server strategy 2
 */
 app.post('/post/2', (req, res) => {
-    console.log(req.headers);
+    console.log(JSON.stringify(req.headers));
+    console.log(req.body);
+    console.log(req.query);
     let key = req.query.key
 
-    if (key !== 123456) {
+    if (key !== '12345678') {
         res.send({message: "failed", data : null})   
+    }else{
+        //send response status for webhook API call 
+        res.send({message: "success", data : req.body})
     }
 
-    //send response status for webhook API call 
-    res.send({message: "success", data : req.body})
 })
 
 app.get('/', (req, res) => {

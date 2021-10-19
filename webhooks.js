@@ -30,7 +30,7 @@ webhooks.add('client1', 'http://127.0.0.1:3034/post/1').then(function(){
 
 
 // defining URL client2 for webhook
-webhooks.add('client2', 'http://127.0.0.1:3034/post/2?key=123456').then(function(){
+webhooks.add('client2', 'http://127.0.0.1:3034/post/2?key=1234567').then(function(){
 
 }).catch(function(err){
     console.log(err)
@@ -53,7 +53,7 @@ app.post('/post/1', (req, res) => {
 app.post('/post/2', (req, res) => {
     const sendBody = req.body
 
-    webhooks.trigger('client2', sendBody)
+    webhooks.trigger('client2', sendBody, {key: '123456'})
     res.send('post data webhook 2')
 })
 
